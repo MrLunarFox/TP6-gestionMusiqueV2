@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArtisteType extends AbstractType
@@ -24,7 +23,7 @@ class ArtisteType extends AbstractType
                     "placeholder"=>"Saisir le nom de l'artiste"
                 ]
             ])
-            ->add('description', CKEditorType::class, [
+            ->add('description', TextareaType::class, [
                 'attr'=>[
                     "placeholder"=>"Saisir la description de l'artiste"
                 ]
