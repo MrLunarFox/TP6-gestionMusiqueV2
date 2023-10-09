@@ -53,7 +53,7 @@ class AlbumType extends AbstractType
                 'label' => "Style(s)",
                 'required'=>false,
                 'multiple' => true,
-                'expanded' => true,
+                // 'expanded' => true,
                 'by_reference'=>false,
                 'attr'=>[
                     'class'=>"selectStyles",

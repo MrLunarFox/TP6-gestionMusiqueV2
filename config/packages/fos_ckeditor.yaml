@@ -3,6 +3,7 @@
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        
 # app/config/config.yml
 fos_ck_editor:
     default_config: config_simple

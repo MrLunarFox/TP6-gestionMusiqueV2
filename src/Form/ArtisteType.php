@@ -24,7 +24,7 @@ class ArtisteType extends AbstractType
                     "placeholder"=>"Saisir le nom de l'artiste"
                 ]
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'attr'=>[
                     "placeholder"=>"Saisir la description de l'artiste"
                 ]
