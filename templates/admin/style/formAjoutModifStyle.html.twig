@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == "admin_style_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    du style
+{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">
+    {% if app.request.attributes.get('_route') == "admin_style_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    du style
+</h1>
+
+{{form_start(formStyle,{'attr':{'novalidate':'novalidate'}})}}
+
+<div class="row">
+    <div class="col-8">{{form_row(formStyle.nom)}}</div>
+    <div class="col-4">{{form_row(formStyle.couleur)}}</div>
+</div>
+
+<div class="row">
+    <div class="col"><input type="submit" class="btn btn-success btn-block" value=
+    {% if app.request.attributes.get('_route') == "admin_style_ajout" %} "Ajouter" 
+    {% else %} "Modifier" {% endif %}></div>
+    <div class="col"><a href="{{path('admin_styles')}}" class="btn btn-warning btn-block">Annuler</a></div>
+</div>
+
+{{form_end(formStyle)}}
+
+{% endblock %}

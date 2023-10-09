@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des albums{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Liste des Albums</h1>
+<hr>
+<div class="row pt-2">
+{% for leAlbum in lesAlbums %}
+
+    {% set nbMorceaux = leAlbum.morceaux|length %}
+
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+        <div class="card mb-3">
+            <h4 class="card-header"><a href="{{path('ficheAlbum', {'id': leAlbum.id })}}">{{leAlbum.nom}}</a></h4>
+            <div class="card-body">
+            <a href="{{path('ficheAlbum', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a>
+            </div>
+            <img class="mx-auto d-block" style="height: auto; width: 200px; display: block;" src="{{leAlbum.image}}" alt="Album Image">
+            <div class="card-body">
+                <p class="card-text">{{leAlbum.date}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{% for leStyle in leAlbum.styles %} <span class="badge" style="background-color: {{leStyle.couleur}};">{{leStyle.nom}}</span> {% endfor %}</li>
+                <li class="list-group-item"><p>{{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</p></li>
+            </ul>
+        </div>
+    </div>
+{% endfor %}
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesAlbums) }}
+    </div>
+</div>
+
+{% endblock %}

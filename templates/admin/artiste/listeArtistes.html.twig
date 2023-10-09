@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des artistes{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Gestion des Artistes | Admin</h1>
+
+<a href="{{path("admin_artiste_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter un artiste</a>
+
+<hr>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col-1"></th>
+            <th scope="col-2">Nom</th>
+            <th scope="col-7">Detail</th>
+            <th scope="col-2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for leArtiste in lesArtistes %}
+
+            {% set nbAlbums = leArtiste.albums|length %}
+
+                <tr class="table-secondary">
+                    <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{leArtiste.image}}" alt="Artiste Image"></td>
+                    <td class="col-2">{{leArtiste.nom}}</td>
+                    <td class="col-7">
+                        <p>
+                            <span><a href="" class="badge badge-success">{{nbAlbums}} {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a></span>
+                            <span class"mx-3">{% if leArtiste.type == 0 %} Artiste solo {% else %} Groupe {% endif %}</span>
+                            <span class"ml-auto"><a href="{{leArtiste.site}}">{{leArtiste.site}}</a></span>
+                        </p>
+                        <p>
+                            {{leArtiste.description|slice(0,100)|raw}}...
+                        </p>
+                    </td>
+                    <td class="col-2">
+                        <a href=" {{path('admin_artiste_modif', {'id': leArtiste.id})}} " class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'un artiste" data-message="Êtes vous sûr de vouloir supprimer l'artiste : {{leArtiste.nom}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_artiste_supr', {'id': leArtiste.id})}}"><i class="fa-solid fa-user-slash"></i></a>
+                    </td>
+                </tr>
+
+        {% endfor %}
+
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesArtistes) }}
+        </div>
+
+    </tbody>
+</table>
+
+<div class="navigation mx-auto">
+    {{ knp_pagination_render(lesArtistes) }} 
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == "admin_artiste_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    d'un artiste
+{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">
+    {% if app.request.attributes.get('_route') == "admin_artiste_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    d'un artiste
+</h1>
+
+{{form_start(formArtiste,{'attr':{'novalidate':'novalidate'}})}}
+
+
+{{form_row(formArtiste.nom)}}
+
+{{form_row(formArtiste.description)}}
+
+<div class="row">
+    <div class="col">{{form_row(formArtiste.site)}}</div>
+    <div class="col">{{form_row(formArtiste.type)}}</div>
+</div>
+
+{{form_row(formArtiste.image)}}
+
+<div class="row">
+    <div class="col"><input type="submit" class="btn btn-success btn-block" value=
+    {% if app.request.attributes.get('_route') == "admin_artiste_ajout" %} "Ajouter"
+    {% else %} "Modifier" {% endif %}></div>
+    <div class="col"><a href="{{path('admin_artistes')}}" class="btn btn-warning btn-block">Annuler</a></div>
+</div>
+
+
+
+
+
+{{form_end(formArtiste)}}
+
+{% endblock %}

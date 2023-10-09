@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des styles{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Gestion des Styles | Admin</h1>
+
+<a href="{{path("admin_style_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter un style</a>
+
+<hr>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col-1">Couleur</th>
+            <th scope="col-2">Nom</th>
+            <th scope="col-7"></th>
+            <th scope="col-2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for leStyle in lesStyles %}
+
+            {% set nbAlbums = leStyle.albums|length %}
+
+                <tr class="table-secondary">
+                    <td class="col-1"><div style="width: 50px; height: 50px; background-color: {{ leStyle.couleur }};"></div></td>
+                    <td class="col-2">{{leStyle.nom}}</td>
+                    <td class="col-7"><a href="" class="badge badge-success">{{nbAlbums}} {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a></td>
+                    <td class="col-2">
+                        <a href=" {{path('admin_style_modif', {'id': leStyle.id})}} " class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'un style" data-message="Êtes vous sûr de vouloir supprimer le style : {{leStyle.nom}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_style_supr', {'id': leStyle.id})}}"><i class="fa-solid fa-user-slash"></i></a>
+                    </td>
+                </tr>
+
+        {% endfor %}
+
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesStyles) }}
+        </div>
+
+    </tbody>
+</table>
+
+<div class="navigation mx-auto">
+    {{ knp_pagination_render(lesStyles) }} 
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}
