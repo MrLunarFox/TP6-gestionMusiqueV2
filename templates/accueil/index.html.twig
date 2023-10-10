@@ -16,9 +16,10 @@ Rejoignez-nous dans ce voyage musical exaltant, et laissez les notes vous guider
 
 Bienvenue sur M@ Musique, où la musique prend vie.</p>
   <hr class="my-4">
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
+  <div class="row">
+    <div class="col"><a href="{{path('app_login')}}" class="btn btn-success btn-block">Connexion</a></div>
+    <div class="col"><a href="{{path('app_register')}}" class="btn btn-warning btn-block">S'enregistrer</a></div>
+</div>
 </div>
 
 {% endblock %}
