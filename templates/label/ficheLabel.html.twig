@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche label{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Fiche du label</h1>
+<hr>
+    {% set nbAlbums = leLabel.albums|length %}
+
+        <div class="card mb-3">
+            <h3 class="card-header">{{leLabel.nom}}</h3>
+            <div class="row">
+                <div class="col-3 d-flex align-items-center mx-auto">    
+                    <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src="{{leLabel.logo}}" alt="Artiste Image">
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                    </div>
+                    <div class="card-body">
+                    <div class="card-body">
+                        <p class="card-text">{{leLabel.annee}}</p>
+                    </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          {% if leLabel.type == "Majeur" %}
+                            <a href="" class="badge badge-danger">{{leLabel.type}}</a>
+                          {% else %}
+                            <a href="" class="badge badge-warning">{{leLabel.type}}</a>
+                          {% endif %}
+                        </li>
+                        <li class="list-group-item">
+                          <a href="" class="">{{nbAlbums}} {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<table class="table table-hover mx-auto">
+  <thead>
+    <tr>
+      <th scope="col-3">Nom</th>
+      <th scope="col-4">Artiste</th>
+      <th scope="col-1">Année</th>
+      <th scope="col-3">Styles</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for leAlbum in leLabel.albums %}
+    <tr class="table-secondary">
+      <td><a href="{{path('ficheAlbum', {'id': leAlbum.id})}}">{{leAlbum.nom}}</a></th>
+      <td scope="row"><a href="{{path('ficheAlbum', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a></td>
+      <td>{{leAlbum.date}}</td>
+      <td>{% for leStyle in leAlbum.styles %} <span class="badge" style="background-color: {{leStyle.couleur}};">{{leStyle.nom}}</span> {% endfor %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

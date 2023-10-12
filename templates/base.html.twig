@@ -21,17 +21,14 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des artistes</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{path('artistes')}}">Liste des artistes</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('artistes')}}">Liste des artistes</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des albums</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{path('albums')}}">Liste des albums</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('albums')}}">Liste des albums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('labels')}}">Liste des labels</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
@@ -44,6 +41,11 @@
                         </div>
                     </li>
                 </ul>
+
+                <ul>
+                    <li></li>
+                </ul>
+
             </div>
         </nav>
 

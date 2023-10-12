@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des labels{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Liste des Labels</h1>
+<hr>
+<div class="row pt-2">
+
+    {% for leLabel in lesLabels %}
+
+    {% set nbAlbums = leLabel.albums|length %}
+
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+        <div class="card mb-3">
+            <h4 class="card-header"><a href="{{path('ficheLabel', {'id': leLabel.id })}}">{{leLabel.nom}}</a></h4>
+            <div class="card-body">
+                <p class="card-text">{{leLabel.description|slice(0,200)|raw}}...</p>
+            </div>
+            <img class="mx-auto d-block" style="height: auto; width: 200px; display: block;" src="{{leLabel.logo}}" alt="Label Logo">
+            <div class="card-body">
+                <p class="card-text">{{leLabel.annee}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {% if leLabel.type == "Majeur" %}
+                        <a href="" class="badge badge-danger">{{leLabel.type}}</a>
+                    {% else %}
+                        <a href="" class="badge badge-warning">{{leLabel.type}}</a>
+                    {% endif %}
+                </li>
+                <li class="list-group-item"><p>{{nbAlbums}} {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</p></li>
+            </ul>
+        </div>
+    </div>
+
+{% endfor %}
+
+    <div class="navigation mx-auto">
+        {{ knp_pagination_render(lesLabels) }}
+    </div>
+</div>
+
+{% endblock %}

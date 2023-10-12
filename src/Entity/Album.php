@@ -52,7 +52,10 @@ class Album
         min : 1,
         minMessage : "Au moins un style doit être sélectionné!",
     )]
-    private Collection $styles; 
+    private Collection $styles;
+
+    #[ORM\ManyToOne(inversedBy: 'albums')]
+    private ?Label $label = null; 
 
     public function __construct()
     {
@@ -173,6 +176,18 @@ class Album
         if ($this->styles->removeElement($style)) {
             $style->removeAlbum($this);
         }
+
+        return $this;
+    }
+
+    public function getLabel(): ?Label
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?Label $label): static
+    {
+        $this->label = $label;
 
         return $this;
     }

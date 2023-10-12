@@ -14,7 +14,8 @@
         <div class="card mb-3">
             <h4 class="card-header"><a href="{{path('ficheAlbum', {'id': leAlbum.id })}}">{{leAlbum.nom}}</a></h4>
             <div class="card-body">
-            <a href="{{path('ficheAlbum', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a>
+                <a href="{{path('ficheAlbum', {'id': leAlbum.artiste.id})}}" class="badge badge-success">{{leAlbum.artiste.nom}}</a> <br>
+                <a href="{{path('ficheAlbum', {'id': leAlbum.label.id})}}" class="badge badge-warning">{{leAlbum.label.nom}}</a>
             </div>
             <img class="mx-auto d-block" style="height: auto; width: 200px; display: block;" src="{{leAlbum.image}}" alt="Album Image">
             <div class="card-body">

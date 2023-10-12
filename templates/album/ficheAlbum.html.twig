@@ -15,9 +15,14 @@
                     <img class="mx-auto d-block" style="height: auto; width: 200px; display: block;" src="{{leAlbum.image}}" alt="Artiste Image">
                 </div>
                 <div class="col">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{path('ficheArtiste', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a></h5>
-                    </div>
+                <div class="row">
+                  <div class="col ml-3" align="left">
+                    <a href="{{path('ficheArtiste', {'id': leAlbum.artiste.id})}}" class="badge badge-success">{{leAlbum.artiste.nom}}</a>
+                  </div>
+                  <div class="col mr-3" align="right">
+                    <a href="{{path('ficheAlbum', {'id': leAlbum.label.id})}}" class="badge badge-warning">{{leAlbum.label.nom}}</a>
+                  </div>
+                </div>
                     <div class="card-body">
                         <p class="card-text">{{leAlbum.date}}</p>
                     </div>
