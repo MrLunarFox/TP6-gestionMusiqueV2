@@ -5,6 +5,9 @@
 {% block body %}
 <h1 class="pt-2 text-center">Fiche de l'artiste</h1>
 <hr>
+
+<a class="btn btn-warning mb-2" href="{{path('artistes')}}">Retour à la page précédente</a>
+
 <div class="row pt-2">
     {% set nbAlbums = leArtiste.albums|length %}
 

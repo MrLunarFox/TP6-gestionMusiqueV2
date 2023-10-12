@@ -5,6 +5,9 @@
 {% block body %}
 <h1 class="pt-2 text-center">Fiche de l'album</h1>
 <hr>
+
+<a class="btn btn-warning mb-2" href="{{path('albums')}}">Retour à la page précédente</a>
+
 <div>
     {% set nbMorceaux = leAlbum.morceaux|length %}
 
