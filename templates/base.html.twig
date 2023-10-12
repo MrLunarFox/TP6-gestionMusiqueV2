@@ -30,24 +30,42 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('labels')}}">Liste des labels</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{path('admin_artistes')}}">Gestion des artistes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{path('admin_styles')}}">Gestion des styles</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{path('admin_albums')}}">Gestion des albums</a>
-                        </div>
-                    </li>
+                    {% if app.user and is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{path('admin_artistes')}}">Gestion des artistes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{path('admin_styles')}}">Gestion des styles</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{path('admin_albums')}}">Gestion des albums</a>
+                            </div>
+                        </li>
+                    {% endif %}
                 </ul>
 
-                <ul>
-                    <li>
-                        
-                    </li>
+                <ul class="navbar-nav my-auto">
+                    {% if app.user %}
+                        <li class="nav_item">
+                            <img class="avatar supermini" src=" {{app.user.avatar}} " alt="Image de {{app.user.fullName}}">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{app.user.fullName}}</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Mon profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href=" {{path('app_logout')}} ">Déconnexion</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav_item">
+                            <a href=" {{path('app_login')}} " class="nav-link">Connexion</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href=" {{path('app_register')}} " class="nav-link">S'inscrire</a>
+                        </li>
+                    {% endif %}
                 </ul>
-
             </div>
         </nav>
 
