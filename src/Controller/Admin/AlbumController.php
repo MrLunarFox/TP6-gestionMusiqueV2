@@ -62,7 +62,7 @@ class AlbumController extends AbstractController
     #[Route('/admin/album/supr/{id}', name: 'admin_album_supr', methods:['GET'])]
     public function suprAlbum(Album $album, EntityManagerInterface $manager): Response
     {
-        $nbMorceaux = $morceau->getMorceaux()->count();
+        $nbMorceaux = $album->getMorceaux()->count();
 
         if($nbMorceaux > 0) {
             $this->addFlash("danger", "Vous ne pouvez pas supprimer cet album car $nbMorceaux morceau(x) y sont associés!");

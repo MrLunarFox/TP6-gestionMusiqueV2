@@ -3,49 +3,52 @@
 namespace App\Form;
 
 use App\Entity\Album;
-use App\Entity\Style;
-use App\Entity\Artiste;
+use App\Entity\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class AlbumType extends AbstractType
+class LabelType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('image', TextType::class, [
-                'attr'=>[
-                    "placeholder"=>"Saisir le chemin de l'image"
-                ]
-            ])
             ->add('nom', TextType::class, [
-                'label'=>"Nom de l'album",
-                'required'=>false,
+                'label'=>"Nom de l'artiste",
                 'attr'=>[
-                    "placeholder"=>"Saisir le nom de l'album"
+                    "placeholder"=>"Saisir le nom de l'artiste"
                 ]
             ])
-            ->add('date', IntegerType::class, [
-                'label'=>"Année de l'album",
-                'required'=>false,
+            ->add('description', TextareaType::class, [
                 'attr'=>[
-                    "placeholder"=>"Saisir l'année de sortie de l'album"
+                    "placeholder"=>"Saisir la description de l'artiste"
                 ]
             ])
-            ->add('artiste', EntityType::class, [
-                'class' => Artiste::class,
-                'choice_label'=>'nom',
-                'label' => "Nom de l'artiste",
-                'required'=>false
+            ->add('annee', IntegerType::class, [
+                'attr'=>[
+                    "placeholder"=>"Saisir le lien du site web de l'artiste"
+                ]
             ])
-            ->add('styles', EntityType::class, [
-                'class' => Style::class,
+            ->add('logo', TextType::class, [
+                'attr'=>[
+                    "placeholder"=>"Saisir le chemin du logo"
+                ]
+            ])
+            ->add('type', ChoiceType::class, [
+                "choices"=>[
+                    "Majeur"=>0,
+                    "Indépendant"=>1
+                ]
+            ])
+            ->add('albums', EntityType::class, [
+                'class' => Album::class,
                 'choice_label'=>'nom',
-                'label' => "Style(s)",
+                'label' => "Album(s) associées",
                 'required'=>false,
                 'multiple' => true,
                 // 'expanded' => true,
@@ -61,7 +64,7 @@ class AlbumType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Album::class,
+            'data_class' => Label::class,
         ]);
     }
 }

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == "admin_label_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    d'un label
+{% endblock %}
+
+{% block stylesheets %} <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> {% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">
+    {% if app.request.attributes.get('_route') == "admin_label_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    d'un label
+</h1>
+
+{{form_start(formLabel,{'attr':{'novalidate':'novalidate'}})}}
+
+
+
+
+
+<div class="row">
+    <div class="col">{{form_row(formLabel.nom)}}{{form_row(formLabel.annee)}}{{form_row(formLabel.description)}}{{form_row(formLabel.type)}}{{form_row(formLabel.logo)}}</div>
+    <div class="col">{{form_row(formLabel.albums)}}</div>
+</div>
+
+<div class="row">
+    <div class="col"><input type="submit" class="btn btn-success btn-block" value=
+    {% if app.request.attributes.get('_route') == "admin_label_ajout" %} "Ajouter"
+    {% else %} "Modifier" {% endif %}></div>
+    <div class="col"><a href="{{path('admin_labels')}}" class="btn btn-warning btn-block">Annuler</a></div>
+</div>
+
+{{form_end(formLabel)}}
+
+{% endblock %}
+
+{% block javascripts %} <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> <script>$(document).ready(function() {$('.selectStyles').select2();
+});</script>{% endblock %}
