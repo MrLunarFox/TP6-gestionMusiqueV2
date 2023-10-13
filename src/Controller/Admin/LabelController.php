@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LabelController extends AbstractController
 {
-    #[Route('/admin/labels', name: 'admin_labels', methods:['GET'])]
+    #[Route('/admin/labels', name: 'admin_labels', methods: ['GET'])]
     public function listeLabels(LabelRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
         $labels = $paginator->paginate(
@@ -28,41 +28,41 @@ class LabelController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/label/ajout', name: 'admin_label_ajout', methods:['GET', 'POST'])]
-    #[Route('/admin/label/modif/{id}', name: 'admin_label_modif', methods:['GET', 'POST'])]
+    #[Route('/admin/label/ajout', name: 'admin_label_ajout', methods: ['GET', 'POST'])]
+    #[Route('/admin/label/modif/{id}', name: 'admin_label_modif', methods: ['GET', 'POST'])]
     public function ajoutModifLabel(Label $label = null, Request $request, EntityManagerInterface $manager): Response
     {
-        if($label == null) {
-            $label = new Label();
+        if (!$label) {
+            $label = new Label(); // Initialisez une nouvelle instance de Label si $label est null
             $mode = "ajouté";
         } else {
             $mode = "modifié";
         }
-
+    
         $form = $this->createForm(LabelType::class, $label);
-
+    
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
+    
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($label);
             $manager->flush();
-
+    
             $this->addFlash("success", "Le label a bien été $mode!");
-
+    
             return $this->redirectToRoute('admin_labels');
         }
-
+    
         return $this->render('admin/label/formAjoutModifLabel.html.twig', [
-            'formLabel' => $form->createView()
+            'formLabel' => $form->createView(),
         ]);
     }
 
-    #[Route('/admin/label/supr/{id}', name: 'admin_label_supr', methods:['GET'])]
+    #[Route('/admin/label/supr/{id}', name: 'admin_label_supr', methods: ['GET'])]
     public function suprLabel(Label $label, EntityManagerInterface $manager): Response
     {
         $nbAlbums = $label->getAlbums()->count();
 
-        if($nbAlbums > 0) {
+        if ($nbAlbums > 0) {
             $this->addFlash("danger", "Vous ne pouvez pas supprimer ce label car $nbAlbums album(s) y sont associés!");
         } else {
             $manager->remove($label);

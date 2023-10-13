@@ -19,18 +19,23 @@ class LabelType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label'=>"Nom de l'artiste",
-                'attr'=>[
-                    "placeholder"=>"Saisir le nom de l'artiste"
+                'label' => "Nom du label", // Ajout du libellé personnalisé
+                'required' => false,
+                'attr' => [
+                    "placeholder" => "Saisir le nom de l'artiste"
                 ]
             ])
             ->add('description', TextareaType::class, [
-                'attr'=>[
-                    "placeholder"=>"Saisir la description de l'artiste"
+                'label' => "Description du label", // Ajout du libellé personnalisé
+                'attr' => [
+                    'required' => false,
+                    "placeholder" => "Saisir la description de l'artiste"
                 ]
             ])
             ->add('annee', IntegerType::class, [
+                'label'=>"Date du label",
                 'attr'=>[
+                    'required'=>false,
                     "placeholder"=>"Saisir le lien du site web de l'artiste"
                 ]
             ])
@@ -40,9 +45,9 @@ class LabelType extends AbstractType
                 ]
             ])
             ->add('type', ChoiceType::class, [
-                "choices"=>[
-                    "Majeur"=>0,
-                    "Indépendant"=>1
+                'choices' => [
+                    'Majeur' => '0',
+                    'Indépendant' => '1',
                 ]
             ])
             ->add('albums', EntityType::class, [
