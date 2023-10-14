@@ -26,10 +26,10 @@
                     </div>
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                          {% if leLabel.type == "Majeur" %}
-                            <a href="" class="badge badge-danger">{{leLabel.type}}</a>
+                          {% if leLabel.type == "0" %}
+                            <a href="" class="badge badge-danger">Majeur</a>
                           {% else %}
-                            <a href="" class="badge badge-warning">{{leLabel.type}}</a>
+                            <a href="" class="badge badge-warning">Indépendant</a>
                           {% endif %}
                         </li>
                         <li class="list-group-item">
@@ -55,7 +55,7 @@
   {% for leAlbum in leLabel.albums %}
     <tr class="table-secondary">
       <td><a href="{{path('ficheAlbum', {'id': leAlbum.id})}}">{{leAlbum.nom}}</a></th>
-      <td scope="row"><a href="{{path('ficheAlbum', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a></td>
+      <td scope="row"><a href="{{path('ficheArtiste', {'id': leAlbum.artiste.id})}}">{{leAlbum.artiste.nom}}</a></td>
       <td>{{leAlbum.date}}</td>
       <td>{% for leStyle in leAlbum.styles %} <span class="badge" style="background-color: {{leStyle.couleur}};">{{leStyle.nom}}</span> {% endfor %}</td>
     </tr>
