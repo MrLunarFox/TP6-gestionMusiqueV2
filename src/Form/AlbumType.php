@@ -8,6 +8,7 @@ use App\Entity\Artiste;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,8 +24,21 @@ class AlbumType extends AbstractType
                 'mapped'=>false,
                 'required'=>false,
                 'label'=>"Pochette de l'album",
+                'attr'=>[
+                    'accept'=>".jpg, .png"
+                ],
                 'row_attr'=>[
                     'class'=>"d-none"
+                ],
+                'constraints'=>[
+                    new Image([
+                        'maxSize'=>'200k',
+                        'maxSizeMessage'=>"La taille maximum de l'image doit être de {{ limit }} ko",
+                        'mimeTypes'=>[
+                            'image/png',
+                            'image/jpeg'
+                        ]
+                    ])
                 ]
             ])
             ->add('image', HiddenType::class)

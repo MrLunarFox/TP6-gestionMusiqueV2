@@ -67,7 +67,7 @@ class Album
         $this->morceaux = new ArrayCollection();
         $this->styles = new ArrayCollection();
         $this->setUpdatedAt(new DateTimeImmutabletable);
-        $this->setImage("1024px-Vinyl_record.svg.png");
+        $this->setImage("default.png");
     }
 
     public function getId(): ?int

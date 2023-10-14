@@ -26,8 +26,9 @@
         {{form_row(formAlbum.styles)}}
     </div>
     <div class="col-4">
-        <img src=" {{asset("images/albums/" ~ formAlbum.image.vars.value)}} " alt="Image de l'album" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: auto; width: 300px; display: block;">
+        <img src=" {{asset("images/albums/" ~ formAlbum.image.vars.value)}} " id="imageAffichee" alt="Image de l'album" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: 300px; width: 300px; display: block;">
         {{form_row(formAlbum.imageFile)}}
+        {{form_errors(formAlbum.imageFile)}}
         <a class="btn btn-primary d-block center" id="chargePochette"><i class="fas fa-upload"> Charger la pochette</i></a>
     </div>
 </div>
