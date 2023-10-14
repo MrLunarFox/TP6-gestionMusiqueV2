@@ -29,7 +29,7 @@
             {% set nbMorceaux = leAlbum.morceaux|length %}
 
                 <tr class="table-secondary">
-                    <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{leAlbum.image}}" alt="Album Image"></td>
+                    <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px; display: block;" src="{{asset("images/albums/" ~ leAlbum.image)}}" alt="Album Image"></td>
                     <td class="col-2">{{leAlbum.nom}}</td>
                     <td class="col-1">{{leAlbum.date}}</td>
                     <td class="col-2">{{leAlbum.artiste.nom}}</td>

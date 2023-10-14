@@ -19,17 +19,20 @@
 {{form_start(formAlbum,{'attr':{'novalidate':'novalidate'}})}}
 
 <div class="row">
-    <div class="col">{{form_row(formAlbum.nom)}}</div>
-    <div class="col">{{form_row(formAlbum.image)}}</div>
+    <div class="col-8">
+        {{form_row(formAlbum.nom)}}
+        {{form_row(formAlbum.date)}}
+        {{form_row(formAlbum.artiste)}}
+        {{form_row(formAlbum.styles)}}
+    </div>
+    <div class="col-4">
+        <img src=" {{asset("images/albums/" ~ formAlbum.image.vars.value)}} " alt="Image de l'album" class="rounded mx-auto d-block img-thumbnail mb-2" style="height: auto; width: 300px; display: block;">
+        {{form_row(formAlbum.imageFile)}}
+        <a class="btn btn-primary d-block center" id="chargePochette"><i class="fas fa-upload"> Charger la pochette</i></a>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col">{{form_row(formAlbum.date)}}</div>
-    <div class="col">{{form_row(formAlbum.artiste)}}</div>
-    <div class="col">{{form_row(formAlbum.styles)}}</div>
-</div>
-
-<div class="row">
+<div class="row mt-2">
     <div class="col"><input type="submit" class="btn btn-success btn-block" value=
     {% if app.request.attributes.get('_route') == "admin_album_ajout" %} "Ajouter"
     {% else %} "Modifier" {% endif %}></div>
@@ -40,5 +43,8 @@
 
 {% endblock %}
 
-{% block javascripts %} <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> <script>$(document).ready(function() {$('.selectStyles').select2();
-});</script>{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>$(document).ready(function() {$('.selectStyles').select2();});</script>
+    <script src=" {{asset("js/gestionUpload.js")}} " defer ></script>
+{% endblock %}

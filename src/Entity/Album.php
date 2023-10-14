@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutabletable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AlbumRepository;
 use Doctrine\Common\Collections\Collection;
@@ -29,7 +30,7 @@ class Album
     )]
     private ?string $nom = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     #[Assert\Range(
         min: 1940,
         max: 2099,
@@ -56,12 +57,17 @@ class Album
     private Collection $styles;
 
     #[ORM\ManyToOne(inversedBy: 'albums')]
-    private ?Label $label = null; 
+    private ?Label $label = null;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
         $this->morceaux = new ArrayCollection();
         $this->styles = new ArrayCollection();
+        $this->setUpdatedAt(new DateTimeImmutabletable);
+        $this->setImage("1024px-Vinyl_record.svg.png");
     }
 
     public function getId(): ?int
@@ -189,6 +195,18 @@ class Album
     public function setLabel(?Label $label): static
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
