@@ -33,6 +33,29 @@
     </div>
 </div>
 
+<h3>Liste des morceaux</h3>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col-6">Titre</th>
+            <th scope="col-2">Durée</th>
+            <th scope="col-2">Piste</th>
+            <th scope="col-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for morceau in formAlbum.morceaux %}  
+            <tr>
+                <td scope="6"> {{form_row(morceau.titre)}} </td>
+                <td scope="2"> {{form_row(morceau.duree)}} </td>
+                <td scope="2"> {{form_row(morceau.piste)}} </td>
+                <td scope="2"></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 <div class="row mt-2">
     <div class="col"><input type="submit" class="btn btn-success btn-block" value=
     {% if app.request.attributes.get('_route') == "admin_album_ajout" %} "Ajouter"
