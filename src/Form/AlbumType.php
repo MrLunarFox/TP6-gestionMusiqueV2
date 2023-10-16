@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class AlbumType extends AbstractType
 {
@@ -74,7 +75,10 @@ class AlbumType extends AbstractType
                     'class'=>"selectStyles",
                 ]
             ])
-            //->add('Valider', SubmitType::class)
+            ->add('morceaux', CollectionType::class, [
+                'entry_type'=>MorceauType::class,
+                'label'=>false
+            ])
         ;
     }
 
