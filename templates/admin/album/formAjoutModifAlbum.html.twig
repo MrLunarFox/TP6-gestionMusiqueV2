@@ -35,6 +35,8 @@
 
 <h3>Liste des morceaux</h3>
 
+<button type="button" class="add-morceau btn btn-primary mb-2">Ajouter un morceau</button>
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -44,15 +46,22 @@
             <th scope="col-2"></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="sousForm"
+            data-index = "{{formAlbum.morceaux|length > 0 ? formAlbum.morceaux|last.vars.name + 1 : 0}}"
+            data-prototype = {{_self.afficheMorceau(formAlbum.morceaux.vars.prototype)|e('html_attr')}}
+            >
         {% for morceau in formAlbum.morceaux %}  
-            <tr>
-                <td scope="6"> {{form_row(morceau.titre)}} </td>
-                <td scope="2"> {{form_row(morceau.duree)}} </td>
-                <td scope="2"> {{form_row(morceau.piste)}} </td>
-                <td scope="2"></td>
-            </tr>
+            {{_self.afficheMorceau(morceau)}}
         {% endfor %}
+
+        {% macro afficheMorceau(morceau) %}
+            <tr>
+                <td class="col-6"> {{form_row(morceau.titre)}} </td>
+                <td class="col-2"> {{form_row(morceau.duree)}} </td>
+                <td class="col-2"> {{form_row(morceau.piste)}} </td>
+                <td class="col-2"><a class="supprMorceau btn btn-danger"><i class="fas fa-trash"></i></a></td>
+            </tr>
+        {% endmacro %}
     </tbody>
 </table>
 

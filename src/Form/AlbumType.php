@@ -77,7 +77,11 @@ class AlbumType extends AbstractType
             ])
             ->add('morceaux', CollectionType::class, [
                 'entry_type'=>MorceauType::class,
-                'label'=>false
+                'label'=>false,
+                'allow_add'=>true,
+                'allow_delete'=>true,
+                'prototype'=>true,
+                'by_reference'=>false
             ])
         ;
     }
