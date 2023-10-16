@@ -80,4 +80,60 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>$(document).ready(function() {$('.selectStyles').select2();});</script>
     <script src=" {{asset("js/gestionUpload.js")}} " defer ></script>
+    <script>
+        window.onload = () => {
+            //Je récupère le bouton "Ajouter un morceau"
+            const btn_add_morceau = document.querySelector('.add-morceau')
+
+            //J'écoute le clic sur ce bouton pour déclencher addFormCollection
+            btn_add_morceau.addEventListener("click", addFormToCollection)
+
+            listenSuppr()
+        };
+
+        //Fonction qui ajoute une ligne (un sous formulaire) représentant un nouveau morceau
+        function addFormToCollection() {
+            //On récupère la div qui entoure le collection
+            const collection = document.querySelector('#sousForm');
+
+            //On récupère l'index à utiliser pour le nouveau formulaire
+            let index = collection.dataset.index;
+
+            //On récupère le prototype
+            let proto = collection.dataset.prototype;
+
+
+            //Et on remplace __name__ par l'index
+            proto = proto.replace(/__name__/g, index);
+
+            //On crée l'élément html contenant le code du proto
+            let elementAAjouter = document.createElement('tr');
+            elementAAjouter.innerHTML = proto;
+
+            //On ajoute le proto à la collection
+            collection.appendChild(elementAAjouter);
+
+            //On augmente l'index de la collection
+            collection.dataset.index++;
+
+            /*On rééxecute cette fonction pour que le nouveau bouton "poubelle"
+              soit écouté par le listener*/
+            listenSuppr()
+        }
+
+        //Fonction qui supprime un morceau (donc un sous formulaire représentant le morceau) du formulaire
+        function listenSuppr() {
+            //Je récupère tous les boutons "poubelle" (supprimer)
+            const ListeBoutons = document.querySelectorAll('.supprMorceau')
+
+            /*J'écoute le clic sur ces vouton pour déclencher le fait
+              de supprimer toute la collection de champs du morceau à supprimer*/
+            ListeBoutons.forEach((bouton) => {
+                bouton.addEventListener("click", function(){
+                    //On supprimer le parent du parent du bouton poubelle donc le <tr>
+                    this.parentNode.parentNode.remove()
+                })
+            })
+        }
+    </script>
 {% endblock %}
