@@ -14,7 +14,9 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
             <a class="navbar-brand" href=" {{path('accueil') }}">M@ Musique</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -73,21 +75,21 @@
 
         <div class="container">
 
-        {#Affiche tout les message flash#}
+            {#Affiche tout les message flash#}
 
-        {% for label, messages in app.flashes %}
+            {% for label, messages in app.flashes %}
 
-        <div class="alert alert-{{label}} mt-3">
-        
-            {% for message in messages %}
-                <p> {{message}} </p>
+            <div class="alert alert-{{label}} mt-3">
+            
+                {% for message in messages %}
+                    <p> {{message}} </p>
+                {% endfor %}
+
+            </div>
+                
             {% endfor %}
 
-        </div>
-            
-        {% endfor %}
-
-        {% block body %}{% endblock %}
+            {% block body %}{% endblock %}
 
         </div>
 
