@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistique des Nationalités{% endblock %}
+
+{% block body %}
+  <h1 class="pt-2 text-center">Statistique des Nationalités des artistes</h1>
+
+  <div class="container mt-5">
+    <canvas id="nationaliteChart" width="400" height="400"></canvas>
+  </div>
+
+  <script src="{{ asset('js/chart.js') }}"></script>
+
+  <script>
+    var jsonData = {
+      labels: [],
+      datasets: [{
+        data: [],
+        backgroundColor: []
+      }]
+    };
+
+    {% for laNationalite in lesNationalites %}
+      jsonData.labels.push('{{ laNationalite.libelle }}');
+      {% set nbArtistes = laNationalite.artistes|length %}
+      jsonData.datasets[0].data.push({{ nbArtistes }});
+    {% endfor %}
+
+    var ctx = document.getElementById('nationaliteChart').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: jsonData,
+      options: {
+        title: {
+          text: 'Répartition des artistes par nationalité'
+        },
+        legend: {
+          position: 'bottom'
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return tooltipItem.yLabel + ' artistes (' + tooltipItem.label + ')';
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Drapeau</th>
+        <th scope="col">Libellé</th>
+        <th scope="col">Nombre d'artistes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for laNationalite in lesNationalites %}
+        {% set nbArtiste = laNationalite.artistes|length %}
+        <tr class="table-secondary">
+          <td><img class="mx-auto d-block" style="height: auto; width: 100px; display: block;" src="{{ laNationalite.drapeau }}" alt="Drapeau de la nationalité"></td>
+          <td>{{ laNationalite.libelle }}</td>
+          <td><a href="" class="badge badge-success">{{ nbArtiste }} {% if nbArtiste > 1 %} artistes {% else %} artiste {% endif %}</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('labels')}}">Liste des labels</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('statistique')}}">Statistique des nationalité</a>
+                    </li>
                     {% if app.user and is_granted('ROLE_ADMIN') %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
@@ -43,6 +46,8 @@
                                 <a class="dropdown-item" href="{{path('admin_albums')}}">Gestion des albums</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{path('admin_labels')}}">Gestion des labels</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{path('admin_nationalites')}}">Gestion des nationalités</a>
                             </div>
                         </li>
                     {% endif %}

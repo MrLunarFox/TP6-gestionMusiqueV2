@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use DateTimeImmutabletable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AlbumRepository;
@@ -66,7 +67,7 @@ class Album
     {
         $this->morceaux = new ArrayCollection();
         $this->styles = new ArrayCollection();
-        $this->setUpdatedAt(new DateTimeImmutabletable);
+        $this->setUpdatedAt(new DateTimeImmutable);
         $this->setImage("default.png");
     }
 

@@ -27,19 +27,21 @@ class ArtisteRepository extends ServiceEntityRepository
     */
    public function listeArtisteComplete(): ?Query
    {
-       return $this->createQueryBuilder('art')
-           ->select('art', 'a')
-           ->leftJoin('art.albums', 'a')
-           ->orderBy('art.nom', 'ASC')
-           ->getQuery()
-       ;
+        return $this->createQueryBuilder('art')
+            ->select('art', 'a', 'n')
+            ->leftJoin('art.albums', 'a')
+            ->leftJoin('art.nationalite', 'n')
+            ->orderBy('art.nom', 'ASC')
+            ->getQuery()
+        ;
    }
 
    public function listeArtisteCompleteAdmin(): ?Query
    {
        return $this->createQueryBuilder('art')
-           ->select('art', 'a')
+           ->select('art', 'a', 'n')
            ->leftJoin('art.albums', 'a')
+           ->leftJoin('art.nationalite', 'n')
            ->orderBy('art.nom', 'ASC')
            ->getQuery()
        ;

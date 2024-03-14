@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == "admin_nationalite_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    du nationalite
+{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">
+    {% if app.request.attributes.get('_route') == "admin_nationalite_ajout" %} Ajout 
+    {% else %} Modification {% endif %} 
+    du nationalite
+</h1>
+
+{{form_start(formNationalite,{'attr':{'novalidate':'novalidate'}})}}
+
+<div class="">{{form_row(formNationalite.libelle)}}</div>
+<div class="">{{form_row(formNationalite.drapeau)}}</div>
+
+<div class="row">
+    <div class="col"><input type="submit" class="btn btn-success btn-block" value=
+    {% if app.request.attributes.get('_route') == "admin_nationalite_ajout" %} "Ajouter" 
+    {% else %} "Modifier" {% endif %}></div>
+    <div class="col"><a href="{{path('admin_nationalites')}}" class="btn btn-warning btn-block">Annuler</a></div>
+</div>
+
+{{form_end(formNationalite)}}
+
+{% endblock %}

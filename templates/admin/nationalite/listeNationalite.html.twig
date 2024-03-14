@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Nationalités{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Gestion des Nationalités | Admin</h1>
+
+<a href="{{path("admin_nationalite_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter une Nationalité</a>
+
+<hr>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col-3">Drapeau</th>
+            <th scope="col-3">Libelle</th>
+            <th scope="col-3">Nombre d'artiste</th>
+            <th scope="col-3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for laNationalite in lesNationalites %}
+
+            {% set nbArtiste = laNationalite.artistes|length %}
+
+                <tr class="table-secondary">
+                    <td class="col-3"><img class="mx-auto d-block" style="height: auto; width: 100px; display: block;" src="{{ laNationalite.drapeau }}" alt="Drapeau de la nationalité"></td>
+                    <td class="col-3">{{laNationalite.libelle}}</td>
+                    <td class="col-3"><a href="" class="badge badge-success">{{nbArtiste}} {% if nbArtiste > 1 %} artistes {% else %} artiste {% endif %}</a></td>
+                    <td class="col-3">
+                        <a href=" {{path('admin_nationalite_modif', {'id': laNationalite.id})}} " class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#modalSimple" data-titre="Suppression d'une Nationalité" data-message="Êtes vous sûr de vouloir supprimer la Nationalité : {{laNationalite.libelle}}" data-libelleBouton="Supprimer" data-lien="{{path('admin_nationalite_supr', {'id': laNationalite.id})}}"><i class="fa-solid fa-user-slash"></i></a>
+                    </td>
+                </tr>
+
+        {% endfor %}
+
+        <div class="navigation mx-auto">
+            {{ knp_pagination_render(lesNationalites) }}
+        </div>
+
+    </tbody>
+</table>
+
+<div class="navigation mx-auto">
+    {{ knp_pagination_render(lesNationalites) }} 
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}

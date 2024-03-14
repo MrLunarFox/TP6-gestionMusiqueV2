@@ -7,6 +7,7 @@ use App\Entity\Artiste;
 use App\Form\ArtisteType;
 use App\Repository\ArtisteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\NationaliteRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

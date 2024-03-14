@@ -16,8 +16,10 @@
 
 {{form_start(formArtiste,{'attr':{'novalidate':'novalidate'}})}}
 
-
-{{form_row(formArtiste.nom)}}
+<div class="row">
+    <div class="col">{{form_row(formArtiste.nom)}}</div>
+    <div class="col">{{form_row(formArtiste.nationalite)}}</div>
+</div>
 
 {{form_row(formArtiste.description)}}
 

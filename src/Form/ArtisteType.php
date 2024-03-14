@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Artiste;
+use App\Entity\Nationalite;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +23,17 @@ class ArtisteType extends AbstractType
                 'label'=>"Nom de l'artiste",
                 'attr'=>[
                     "placeholder"=>"Saisir le nom de l'artiste"
+                ]
+            ])
+            ->add('nationalite', EntityType::class, [
+                'class' => Nationalite::class,
+                'choice_label'=>'libelle',
+                'label' => "Nationalité",
+                'required'=>true,
+                'multiple' => false,
+                // 'expanded' => true,
+                'attr'=>[
+                    'class'=>"selectStyles",
                 ]
             ])
             ->add('description', TextareaType::class, [

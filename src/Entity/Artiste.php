@@ -44,6 +44,9 @@ class Artiste
     #[ORM\OneToMany(mappedBy: 'artiste', targetEntity: Album::class)]
     private Collection $albums;
 
+    #[ORM\ManyToOne(inversedBy: 'artistes')]
+    private ?Nationalite $nationalite = null;
+
     public function __toString()
     {
         return $this->nom;
@@ -152,6 +155,18 @@ class Artiste
                 $album->setArtiste(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNationalite(): ?Nationalite
+    {
+        return $this->nationalite;
+    }
+
+    public function setNationalite(?Nationalite $nationalite): static
+    {
+        $this->nationalite = $nationalite;
 
         return $this;
     }
