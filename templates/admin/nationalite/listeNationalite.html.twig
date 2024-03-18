@@ -8,6 +8,11 @@
 
 <a href="{{path("admin_nationalite_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter une Nationalité</a>
 
+{{ form_start(formFiltreNationalite) }}
+    {{ form_row(formFiltreNationalite.libelle) }}
+    <button type="submit" class="btn btn-warning">Rechercher</button>
+{{ form_end(formFiltreNationalite) }}
+
 <hr>
 
 <table class="table table-hover">

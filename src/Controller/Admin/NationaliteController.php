@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Nationalite;
 use App\Form\NationaliteType;
+use App\Form\FiltreNationaliteType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\NationaliteRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,14 +18,24 @@ class NationaliteController extends AbstractController
     #[Route('/admin/nationalite', name: 'admin_nationalites', methods:['GET'])]
     public function listeNationalite(NationaliteRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
+        $libelle = null;
+        $formFiltreNationalite = $this->createForm(FiltreNationaliteType::class);
+        $formFiltreNationalite->handleRequest($request);
+
+        if($formFiltreNationalite->isSubmitted() && $formFiltreNationalite->isValid())
+        {
+            $libelle = $formFiltreNationalite->get('libelle')->getData();
+        }
+
         $nationalites = $paginator->paginate(
-            $repo->listeNationaliteCompleteAdmin(),
+            $repo->listeNationaliteCompleteAdmin($libelle),
              $request->query->getInt('page', 1),
             9
         );
     
         return $this->render('admin/nationalite/listeNationalite.html.twig', [
-            'lesNationalites' => $nationalites
+            'lesNationalites' => $nationalites,
+            'formFiltreNationalite' => $formFiltreNationalite->createView()
         ]);
     }
 

@@ -26,9 +26,7 @@ class Artiste
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(
         min : 10,
-        max : 15,
         minMessage : "La description doit comporter au minimum {{ limit }}!",
-        maxMessage : "La description doit comporter au maximum {{ limit }}!",
     )]
     private ?string $description = null;
 

@@ -3,19 +3,19 @@
 namespace App\Controller;
 
 use App\Repository\NationaliteRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StatistiqueController extends AbstractController
 {
     #[Route('/statistique', name: 'statistique')]
-    public function statistiqueNationalite(NationaliteRepository $repo): Response
+    public function statistiqueNationalite(NationaliteRepository $nationaliteRepository): Response
     {
-        $nationalites = $repo->findAll();
+        $lesNationalites = $nationaliteRepository->listeNationaliteComplete()->getResult();
 
         return $this->render('statistique/statistique.html.twig', [
-            'lesNationalites' => $nationalites
+            'lesNationalites' => $lesNationalites,
         ]);
     }
 }

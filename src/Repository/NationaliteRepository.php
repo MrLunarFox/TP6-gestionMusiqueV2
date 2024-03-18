@@ -33,14 +33,19 @@ class NationaliteRepository extends ServiceEntityRepository
         ;
     }
 
-    public function listeNationaliteCompleteAdmin(): ?Query
+    public function listeNationaliteCompleteAdmin($libelle = null): ?Query
     {
-        return $this->createQueryBuilder('n')
+        $query = $this->createQueryBuilder('n')
             ->select('n, art')
             ->leftJoin('n.artistes', 'art')
-            ->orderBy('n.libelle', 'ASC')
-            ->getQuery()
+            ->orderBy('n.libelle', 'ASC');
+            if($libelle != null)
+            {
+                $query->andWhere('n.libelle like :libelleChercher')
+                ->setParameter('libelleChercher', "%{$libelle}%");
+            }
         ;
+        return $query->getQuery();
     }
 
 
