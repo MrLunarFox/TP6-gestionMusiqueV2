@@ -6,14 +6,13 @@
 
 <h1 class="pt-2 text-center">Gestion des Nationalités | Admin</h1>
 
-<a href="{{path("admin_nationalite_ajout")}}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Ajouter une Nationalité</a>
-
 {{ form_start(formFiltreNationalite) }}
-    {{ form_row(formFiltreNationalite.libelle) }}
-    <button type="submit" class="btn btn-warning">Rechercher</button>
+    <div class="row">
+        <div class="col">{{ form_row(formFiltreNationalite.libelle) }}</div>
+        <div class="col"><button type="submit" class="btn btn-warning">Rechercher</button></div>
+        <a href="{{path("admin_nationalite_ajout")}}" class="btn btn-success mb-3"><i class="fa-solid fa-user-plus"></i> Ajouter une Nationalité</a>
+    </div>
 {{ form_end(formFiltreNationalite) }}
-
-<hr>
 
 <table class="table table-hover">
     <thead>
