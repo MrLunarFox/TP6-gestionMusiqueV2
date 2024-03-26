@@ -9,15 +9,16 @@
 {% block body %}
 
 <h1 class="pt-2 text-center">
-    {% if app.request.attributes.get('_route') == "admin_nationalite_ajout" %} Ajout 
-    {% else %} Modification {% endif %} 
-    du nationalite
+    {% if app.request.attributes.get('_route') == "admin_nationalite_ajout" %} Ajouter 
+    {% else %} Modifier {% endif %} 
+     une nationalite
 </h1>
 
 {{form_start(formNationalite,{'attr':{'novalidate':'novalidate'}})}}
 
 <div class="">{{form_row(formNationalite.libelle)}}</div>
 <div class="">{{form_row(formNationalite.drapeau)}}</div>
+<div class="">{{form_row(formNationalite._token)}}</div>
 
 <div class="row">
     <div class="col"><input type="submit" class="btn btn-success btn-block" value=
