@@ -71,16 +71,21 @@ class NationaliteController extends AbstractController
     #[Route('/admin/nationalite/supr/{id}', name: 'admin_nationalite_supr', methods:['GET'])]
     public function suprNationalite(Nationalite $nationalite, EntityManagerInterface $manager): Response
     {
-        $nbArtistes = $nationalite->getArtistes()->count();
+        // $nbArtistes = $nationalite->getArtistes()->count();
 
-        if($nbArtistes > 0) {
-            $this->addFlash("danger", "Vous ne pouvez pas supprimer cette nationalite car $nbArtistes artiste(s) y sont associés!");
-        } else {
-            $manager->remove($nationalite);
+        // if($nbArtistes > 0) {
+        //     $this->addFlash("danger", "Vous ne pouvez pas supprimer cette nationalite car $nbArtistes artiste(s) y sont associés!");
+        // } else {
+        //     $manager->remove($nationalite);
+        //     $manager->flush();
+
+        //     $this->addFlash("success", "La nationalite a bien été supprimé!");
+        // }
+
+        $manager->remove($nationalite);
             $manager->flush();
 
             $this->addFlash("success", "La nationalite a bien été supprimé!");
-        }
 
         return $this->redirectToRoute('admin_nationalites');
     }
